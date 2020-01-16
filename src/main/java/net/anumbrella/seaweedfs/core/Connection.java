@@ -682,7 +682,7 @@ public class Connection {
             try {
                 while (!shutdown) {
                     synchronized (this) {
-                        wait(statusExpiry);
+                        wait(statusExpiry * 1000);
                         // Close free connection
                         clientConnectionManager.closeExpiredConnections();
                         clientConnectionManager.closeIdleConnections(idleConnectionExpiry, TimeUnit.SECONDS);

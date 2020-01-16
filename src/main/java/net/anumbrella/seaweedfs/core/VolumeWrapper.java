@@ -8,6 +8,7 @@ import net.anumbrella.seaweedfs.exception.SeaweedfsException;
 import net.anumbrella.seaweedfs.exception.SeaweedfsFileNotFoundException;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpHead;
@@ -60,7 +61,8 @@ public class VolumeWrapper {
         }
 
         MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-
+        RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(5000).setSocketTimeout(5000).build();
+        httpPost.setConfig(requestConfig);
         httpPost.setHeader(new BasicHeader("Accept-Language", "zh-cn"));
 
         builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
